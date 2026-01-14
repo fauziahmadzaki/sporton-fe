@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #ff5f3f;
+  --primary-light: #f4ebeb;
+  --dark: #111111;
+  --dark-alternate: #1b1918;
+}
+
+@theme inline {
+  --color-dark: var(--dark);
+  --color-dark-alternate: var(--dark-alternate);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+
+  --color-foreground: var(--foreground);
+  --font-poppins: var(--font-poppins);
+}
+
+* {
+  @apply font-poppins;
+}
