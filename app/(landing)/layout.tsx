@@ -9,7 +9,7 @@ export default function LandingLayout({
 }) {
   return (
     <ProductsProvider>
-      <div className="w-full">
+      <div className="w-full overflow-hidden">
         <Header />
         <main className="pt-5">{children}</main>
         <Footer />
