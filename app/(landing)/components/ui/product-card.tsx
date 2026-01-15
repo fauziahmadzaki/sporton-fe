@@ -5,11 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiPlus } from "react-icons/fi";
 
-export const ProductCard = ({ name, category, imgUrl, price }: ProductType) => {
-  const slug = slugify(name);
+export const ProductCard = ({
+  id,
+  name,
+  category,
+  imgUrl,
+  price,
+}: ProductType) => {
   return (
     <div className="p-2 shadow-sm space-y-4 relative">
-      <Link href={`/product/${slug}`} className="cursor-pointer">
+      <Link href={`/product/${id}`} className="cursor-pointer">
         <div className="h-75 bg-primary-light flex justify-center items-center">
           <Image width={200} height={200} alt={name} src={imgUrl} />
         </div>

@@ -11,7 +11,7 @@ export default function LandingLayout({
     <ProductsProvider>
       <div className="w-full overflow-hidden">
         <Header />
-        <main className="pt-5">{children}</main>
+        <main className="pt-20 md:pt-20">{children}</main>
         <Footer />
       </div>
     </ProductsProvider>

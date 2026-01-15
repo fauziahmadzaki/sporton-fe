@@ -8,12 +8,12 @@ import {
 
 export const ProductAction = ({
   count,
-  slug,
+  id,
   handlerInc,
   handlerDec,
 }: {
   count: number;
-  slug: string;
+  id: string;
   handlerInc?: () => void;
   handlerDec?: () => void;
 }) => {

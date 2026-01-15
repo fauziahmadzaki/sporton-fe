@@ -42,23 +42,21 @@ const Header = () => {
 
   return (
     <header
-      className={` sticky top-0 z-50 bg-white ${
+      className={`fixed w-full top-0 z-50 bg-white ${
         isScrolled ? "shadow-sm  md:bg-white" : "md:bg-transparent"
       }`}
     >
       <div className="px-5 max-w-7xl flex justify-between items-center mx-auto py-5 relative">
-        {/* LOGO */}
         <Link href="/">
           <Image
             src={"/images/logo.svg"}
             width={127}
             height={30}
             alt="Sporton Logo"
-            className="w-32 md:w-fit cursor-pointer" // Tambah cursor-pointer
+            className="w-32 md:w-fit cursor-pointer"
           />
         </Link>
 
-        {/* NAVIGATION */}
         <nav
           className={`
             absolute top-full left-0 w-full bg-white shadow-lg flex flex-col items-center overflow-hidden transition-all duration-300 ease-in-out

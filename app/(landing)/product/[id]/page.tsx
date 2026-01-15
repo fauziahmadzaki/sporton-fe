@@ -11,9 +11,11 @@ import { useState } from "react";
 export default function ProductDetail() {
   const [count, setCount] = useState(1);
 
-  const { slug } = useParams();
+  const { id } = useParams();
   const { products } = useProduct();
-  const product = products.find((product) => slugify(product.name) == slug);
+  const product = products.find(
+    (product) => slugify(product.id) === (id as string)
+  );
   if (!product) return <div>Product not found</div>;
 
   const handlerInc = () => setCount(count + 1);
@@ -47,7 +49,7 @@ export default function ProductDetail() {
         </p>
         <ProductAction
           count={count}
-          slug={slugify(product.name)}
+          id={product.id}
           handlerDec={handlerDec}
           handlerInc={handlerInc}
         />
