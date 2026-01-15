@@ -15,7 +15,7 @@ const footerUrls = [
 export default function Footer() {
   return (
     <footer className="pt-13  bg-dark mt-52.75">
-      <div className="w-full px-25 flex flex-col md:flex-row justify-between items-center md:items-start gap-20 md:gap-0 pb-22.75">
+      <div className="w-full px-5 md:px-25 flex flex-col md:flex-row justify-between items-center md:items-start gap-20 md:gap-0 pb-22.75">
         <div className="space-y-7.5 max-w-md">
           <Image
             width={187.61}

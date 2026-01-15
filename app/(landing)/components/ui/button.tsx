@@ -1,5 +1,5 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "dark";
   size?: "sm" | "md";
   className?: string;
 }
@@ -16,6 +16,7 @@ export const Button = ({
   const variants = {
     primary: "bg-primary text-white",
     ghost: "bg-transparant text-black",
+    dark: "bg-dark text-white",
   };
 
   const sizes = {
