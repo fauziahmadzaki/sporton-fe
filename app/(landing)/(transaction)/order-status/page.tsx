@@ -9,3 +9,5 @@ export default function OrderStatusPage() {
     </Suspense>
   );
 }
+
+export const runtime = "edge";
