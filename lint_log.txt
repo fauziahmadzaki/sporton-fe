@@ -1,0 +1,33 @@
+
+> sporton-fe@0.1.0 lint
+> eslint
+
+
+D:\Vs Code\Next.js\sporton-app\sporton-fe\app\(landing)\(transaction)\order-status\page.tsx
+  6:8   warning  'Link' is defined but never used             @typescript-eslint/no-unused-vars
+  7:10  warning  'useSearchParams' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Vs Code\Next.js\sporton-app\sporton-fe\app\(landing)\(transaction)\payment\page.tsx
+  65:58  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  65:74  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  74:65  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  75:58  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\Vs Code\Next.js\sporton-app\sporton-fe\app\(landing)\product\[id]\page.tsx
+  43:27  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  44:46  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\Vs Code\Next.js\sporton-app\sporton-fe\components\layouts\header.tsx
+  4:20  warning  'FiShoppingBag' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Vs Code\Next.js\sporton-app\sporton-fe\components\product-card.tsx
+  1:28  warning  'ProductType' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Vs Code\Next.js\sporton-app\sporton-fe\components\product-cart.tsx
+  3:39  warning  'FiTrash' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Vs Code\Next.js\sporton-app\sporton-fe\components\ui\input.tsx
+  12:3  warning  'className' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 12 problems (6 errors, 6 warnings)
+

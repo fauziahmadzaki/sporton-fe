@@ -11,4 +11,8 @@ interface ProductsType {
   products: ProductType[];
 }
 
-export { ProductType, ProductsType };
+interface ProductCardProps extends ProductType {
+  addToCart: (id: string, quantity: number, price: number) => void;
+}
+
+export { ProductType, ProductsType, ProductCardProps };
