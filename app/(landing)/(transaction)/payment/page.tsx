@@ -62,8 +62,8 @@ export default function PaymentPage() {
             <ol className="list-decimal pl-3.75 text-xs mb-5">
               <li>
                 Transfer the total amount of <strong>Rp. 1.035.000</strong> to
-                your preferred bank account listed under 'Payment Options' (BCA,
-                Mandiri, or BTPN).
+                your preferred bank account listed under &apos;Payment
+                Options&apos; (BCA, Mandiri, or BTPN).
               </li>
               <li>
                 After completing the transfer,{" "}
@@ -71,11 +71,12 @@ export default function PaymentPage() {
                 transfer confirmation. This will be needed for the next step.
               </li>
               <li>
-                Upload the payment receipt/screenshot using the '
-                <strong>Upload Receipt & Confirm</strong>' button below to
-                validate your transaction.
+                Upload the payment receipt/screenshot using the &apos;
+                <strong>Upload Receipt &amp; Confirm</strong>&apos; button below
+                to validate your transaction.
               </li>
             </ol>
+
             <FileUploader
               id="receiptFile"
               name="receipt"
@@ -87,7 +88,7 @@ export default function PaymentPage() {
               <CartTotalPrice totalPrice={totalPrice} />
               <Button variant="dark" className="w-full" asChild>
                 <Link href={"/order-status"}>
-                  <FiCheckCircle size={24} /> Upload Receipt & Confirm
+                  <FiCheckCircle size={24} /> Upload Receipt &amp; Confirm
                 </Link>
               </Button>
             </div>

@@ -40,9 +40,9 @@ export default function ProductDetail() {
           The SportsOn HyperSoccer v2 is engineered for the player who demands
           precision, power, and unrivaled speed on the pitch. Featuring a
           striking, two-toned black and white design with deep crimson accents,
-          these cleats don't just perform—they make a statement. Experience the
-          future of football footwear with v2's enhanced fit and cutting-edge
-          traction.
+          these cleats don&apos;t just perform—they make a statement. Experience
+          the future of football footwear with v2&apos;s enhanced fit and
+          cutting-edge traction.
         </p>
         <p className="text-[32px] text-primary font-semibold">
           Rp. {priceFormatter(product.price)}
