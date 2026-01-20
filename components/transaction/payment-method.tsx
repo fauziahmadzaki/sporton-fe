@@ -2,13 +2,13 @@ import { Divider } from "@/components/ui/divider";
 import { FiCreditCard } from "react-icons/fi";
 
 export const PaymentMethod = ({
-  name,
-  category,
-  creditNumber,
+  bankName,
+  category = "Bank Transfer",
+  accountNumber,
 }: {
-  name?: string;
+  bankName?: string;
   category?: string;
-  creditNumber?: string;
+  accountNumber?: string;
 }) => {
   return (
     <div>
@@ -18,8 +18,8 @@ export const PaymentMethod = ({
         </div>
         <div className="flex justify-between w-full">
           <div>
-            <p className="font-bold">{name}</p>
-            <p className="text-sm">{creditNumber}</p>
+            <p className="font-bold">{bankName}</p>
+            <p className="text-sm">{accountNumber}</p>
           </div>
           <div className="bg-[#DDEEFF]  text-black text-sm h-fit px-2.5 py-0.5">
             {category}

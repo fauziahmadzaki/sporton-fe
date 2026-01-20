@@ -1,9 +1,8 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardBody } from "@/components/ui/card";
+import { getTransactionById } from "@/services/transaction-service";
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
 import { FiRefreshCcw } from "react-icons/fi";
 
 const messages = {
@@ -14,7 +13,7 @@ const messages = {
     iconUrl: "/images/icons/cart-check-solid.png",
     bgColor: "bg-blue-500/12",
   },
-  success: {
+  paid: {
     title: "Order Confirmed !!",
     message:
       "We have received your payment, and your order is currently processed by our staff, just wait until your favorite sportswear arrive in your home. We will contact you in Whatsapp for further shipping updates.",
@@ -23,13 +22,17 @@ const messages = {
   },
 };
 
-export default function OrderStatusPage() {
-  const [status, setStatus] = useState<"pending" | "success">("pending");
-
-  const message = messages[status];
+export default async function OrderStatusPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = await params;
+  const transaction = await getTransactionById(id);
+  const message = messages[transaction.status as "pending" | "paid"]!;
 
   return (
-    <div className="min-h-screen bg-neutral-100 pt-5">
+    <>
       <h1 className="text-5xl font-bold text-center mb-10">Payment</h1>
       <Card className="max-w-lg mx-auto">
         <CardBody className="py-15 flex flex-col items-center justify-center px-16 gap-2">
@@ -46,18 +49,16 @@ export default function OrderStatusPage() {
           <h2 className="text-2xl font-bold">{message.title}</h2>
           <p className="text-center">{message.message}</p>
 
-          {status === "pending" && (
-            <Button
-              variant="dark"
-              className="w-full"
-              onClick={() => setStatus("success")}
-            >
-              <FiRefreshCcw />
-              Refresh Status
+          {transaction.status === "pending" && (
+            <Button asChild>
+              <Link href={""}>
+                <FiRefreshCcw />
+                Refresh Status
+              </Link>
             </Button>
           )}
         </CardBody>
       </Card>
-    </div>
+    </>
   );
 }

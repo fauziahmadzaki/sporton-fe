@@ -7,6 +7,7 @@ interface FileUploaderProps {
   id: string;
   placeholder: string;
   handleChange?: (file: File | null) => void;
+  ext: string[];
 }
 
 export const FileUploader = ({
@@ -14,13 +15,26 @@ export const FileUploader = ({
   id,
   placeholder,
   handleChange,
+  ext,
 }: FileUploaderProps) => {
   const [file, setFile] = useState<File | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFile = e.target.files[0];
+      const isValid = ext.includes(selectedFile.type.split("/")[1]);
+      if (!isValid) {
+        setErrorMessage(
+          "Invalid file type, only " + ext.join(", ") + " allowed",
+        );
+        return;
+      }
+    }
     const selectedFile = e.target.files?.[0] ?? null;
 
     setFile(selectedFile);
+    setErrorMessage("");
     handleChange?.(selectedFile);
   };
 
@@ -37,6 +51,7 @@ export const FileUploader = ({
       </label>
 
       {file && <p className="text-xs mt-2 text-gray-600">{file.name}</p>}
+      {errorMessage && <p className="text-xs text-red-500">{errorMessage}</p>}
     </div>
   );
 };

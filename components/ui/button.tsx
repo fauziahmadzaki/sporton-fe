@@ -11,16 +11,21 @@ export const Button = ({
   children,
   size = "md",
   variant = "primary",
-  className,
+  className = "",
   asChild = false,
-
+  disabled = false,
   ...props
 }: ButtonProps) => {
   const baseStyle =
-    "inline-flex justify-center items-center gap-2 cursor-pointer hover:scale-105 transition-transform";
+    "inline-flex justify-center items-center gap-2 transition-transform";
+
+  const interactiveStyle = "cursor-pointer hover:scale-105";
+
+  const disabledStyle = "cursor-not-allowed opacity-50 hover:scale-100";
+
   const variants = {
     primary: "bg-primary text-white",
-    ghost: "bg-transparant text-black",
+    ghost: "bg-transparent text-black",
     dark: "bg-dark text-white",
   };
 
@@ -29,18 +34,28 @@ export const Button = ({
     md: "px-9 py-4 text-base",
   };
 
-  const classes = `${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `
+    ${baseStyle}
+    ${variants[variant]}
+    ${sizes[size]}
+    ${disabled ? disabledStyle : interactiveStyle}
+    ${className}
+  `;
 
-  if (asChild && React.isValidElement<{ className?: string }>(children)) {
+  if (
+    asChild &&
+    React.isValidElement<{ className?: string; "aria-disabled"?: boolean }>(
+      children,
+    )
+  ) {
     return React.cloneElement(children, {
-      className: `${classes} ${children.props.className}`,
+      className: `${classes} ${children.props.className ?? ""}`,
+      "aria-disabled": disabled,
     });
   }
+
   return (
-    <button
-      {...props}
-      className={`${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`}
-    >
+    <button {...props} disabled={disabled} className={classes}>
       {children}
     </button>
   );

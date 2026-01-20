@@ -1,7 +1,5 @@
 "use client";
-
-import { useCart } from "@/hooks/use-cart";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   FiChevronUp,
   FiChevronDown,
@@ -9,23 +7,23 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 import { redirect } from "next/navigation";
+import { useCartStore } from "@/hooks/use-cart-store";
+import { Product } from "@/types";
 
 export const ProductAction = ({
   count,
-  id,
+  product,
   handlerInc,
   handlerDec,
   handlerReset,
-  price,
 }: {
   count: number;
-  id: string;
+  product: Product;
   handlerInc?: () => void;
   handlerDec?: () => void;
   handlerReset: React.Dispatch<React.SetStateAction<number>>;
-  price: number;
 }) => {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartStore();
 
   return (
     <div className="flex flex-wrap xl:flex-nowrap gap-5 items-stretch">
@@ -51,7 +49,7 @@ export const ProductAction = ({
       <Button
         className="w-full"
         onClick={() => {
-          addToCart(id, count, price);
+          addToCart(product, count);
           handlerReset(1);
         }}
       >
@@ -62,7 +60,7 @@ export const ProductAction = ({
         className="w-full"
         variant="dark"
         onClick={() => {
-          addToCart(id, count, price);
+          addToCart(product, count);
           redirect("/checkout");
         }}
       >

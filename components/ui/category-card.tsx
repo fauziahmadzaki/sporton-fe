@@ -3,7 +3,6 @@ import Image from "next/image";
 interface CategoryCardProps {
   name: string;
   image: string;
-  size: number;
 }
 
 export const CategoryCard = ({ name, image }: CategoryCardProps) => {

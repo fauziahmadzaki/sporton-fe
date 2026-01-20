@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiSearch, FiMenu, FiX } from "react-icons/fi"; // Tambah FiX untuk icon close
 import { useEffect, useState } from "react";
-import { ProductCart } from "../product-cart";
+import { ProductCart } from "../product/product-cart";
 
 const menuItems = [
   {
@@ -12,11 +12,11 @@ const menuItems = [
   },
   {
     label: "Categories",
-    href: "/",
+    href: "/#category",
   },
   {
     label: "Explore Products",
-    href: "/",
+    href: "/#product",
   },
 ];
 

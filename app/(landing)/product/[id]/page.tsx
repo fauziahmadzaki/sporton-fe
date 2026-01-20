@@ -1,27 +1,18 @@
 "use client";
-import { useProduct } from "@/hooks/use-product";
-import { slugify } from "@/utils/slugify";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import priceFormatter from "@/utils/price-formatter";
-import { ProductAction } from "@/components/product-action";
-import { useState } from "react";
+import { ProductAction } from "@/components/product/product-action";
+import { getImageUrl } from "@/lib/api";
+import { useProductDetail } from "@/hooks/use-product-detail";
+import { Loading } from "@/components/ui/loading";
 
 export default function ProductDetail() {
-  const [count, setCount] = useState(1);
+  const { count, product, handlerDec, handlerInc, setCount, isLoading } =
+    useProductDetail();
+  console.log(product);
 
-  const { id } = useParams();
-  const { products } = useProduct();
-  const product = products.find(
-    (product) => slugify(product.id) === (id as string),
-  );
-  if (!product) return <div>Product not found</div>;
-
-  const handlerInc = () => setCount(count + 1);
-  const handlerDec = () => {
-    if (count > 1) setCount(count - 1);
-  };
+  if (isLoading) return <Loading />;
 
   return (
     <div className="px-5 lg:px-10  xl:max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-start  gap-11.25 mt-10 pb-35">
@@ -29,13 +20,13 @@ export default function ProductDetail() {
         <Image
           width={400}
           height={200}
-          src={product.imgUrl}
+          src={getImageUrl(product.imageUrl)}
           alt={product.name}
         />
       </div>
       <div className="flex-1 space-y-4.5">
         <h1 className="text-5xl font-bold">{product.name}</h1>
-        <Badge>{product.category}</Badge>
+        <Badge>{product.category.name}</Badge>
         <p className="leading-loose mb-8">
           The SportsOn HyperSoccer v2 is engineered for the player who demands
           precision, power, and unrivaled speed on the pitch. Featuring a
@@ -47,13 +38,13 @@ export default function ProductDetail() {
         <p className="text-[32px] text-primary font-semibold">
           Rp. {priceFormatter(product.price)}
         </p>
+        <p className="text-lg">Stocks : {product.stock}</p>
         <ProductAction
           count={count}
-          id={product.id}
+          product={product}
           handlerDec={handlerDec}
           handlerInc={handlerInc}
           handlerReset={setCount}
-          price={product.price}
         />
       </div>
     </div>

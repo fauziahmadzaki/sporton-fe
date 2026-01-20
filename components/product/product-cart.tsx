@@ -1,22 +1,21 @@
 "use client";
-
 import { FiArrowRight, FiShoppingBag, FiTrash2 } from "react-icons/fi";
-import { SmallBadge } from "./ui/badge";
-import { Divider } from "./ui/divider";
+import { SmallBadge } from "../ui/badge";
+import { Divider } from "../ui/divider";
 import priceFormatter from "@/utils/price-formatter";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Image from "next/image";
-import { useCart } from "@/hooks/use-cart";
-import { useProduct } from "@/hooks/use-product";
-import { CartItem as CartItemProps } from "@/providers/cart-provider";
-import { ProductType } from "@/types/product";
 import { useState } from "react";
 import Link from "next/link";
+import {
+  CartItem as CartItemProps,
+  useCartStore,
+} from "@/hooks/use-cart-store";
+import { getImageUrl } from "@/lib/api";
 
 export const ProductCart = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { carts, removeFromCart, totalPrice } = useCart();
-  const { products } = useProduct();
+  const { carts, removeFromCart, totalPrice } = useCartStore();
   return (
     <div className="relative cursor-pointer group">
       <FiShoppingBag
@@ -29,8 +28,7 @@ export const ProductCart = () => {
       {isOpen && (
         <Cart
           carts={carts}
-          products={products}
-          totalPrice={totalPrice}
+          totalPrice={totalPrice()}
           removeFromCart={removeFromCart}
         />
       )}
@@ -40,17 +38,14 @@ export const ProductCart = () => {
 
 export const Cart = ({
   carts,
-  products,
   removeFromCart,
-  totalPrice,
 }: {
   carts: CartItemProps[];
-  products: ProductType[];
   removeFromCart: (id: string) => void;
   totalPrice: number;
 }) => {
   return (
-    <div className="absolute bg-white w-sm z-50 right-0 top-10 shadow-lg border border-gray-200">
+    <div className="absolute bg-white w-xs md:w-sm z-50 -right-7 md:right-0 top-10 shadow-lg border border-gray-200">
       <h3 className="font-bold text-center p-2.5">Shopping Cart</h3>
       <Divider />
 
@@ -61,26 +56,22 @@ export const Cart = ({
         </>
       ) : (
         carts.map((cart) => {
-          return products.map((product) => {
-            if (product.id === cart.id) {
-              return (
-                <CartItem
-                  id={cart.id}
-                  key={cart.id}
-                  name={product.name}
-                  imgUrl={product.imgUrl}
-                  quantity={cart.quantity}
-                  price={product.price}
-                  removeFromCart={removeFromCart}
-                />
-              );
-            }
-          });
+          return (
+            <CartItem
+              id={cart._id}
+              key={cart._id}
+              name={cart.name}
+              imgUrl={getImageUrl(cart.imageUrl)}
+              quantity={cart.quantity}
+              price={cart.price}
+              removeFromCart={removeFromCart}
+            />
+          );
         })
       )}
 
       <div className="w-full p-2.5 space-y-4">
-        <CartTotalPrice totalPrice={totalPrice} />
+        <CartTotalPrice />
         {carts.length > 0 && (
           <Button variant="dark" className="w-full" asChild>
             <Link href={"/checkout"}>
@@ -125,7 +116,10 @@ export const CartItem = ({
             </div>
           </div>
         </div>
-        <button className=" block" onClick={() => removeFromCart(id)}>
+        <button
+          className="block cursor-pointer hover:text-primary"
+          onClick={() => removeFromCart(id)}
+        >
           <FiTrash2 size={20} />
         </button>
       </div>
@@ -134,12 +128,14 @@ export const CartItem = ({
   );
 };
 
-export const CartTotalPrice = ({ totalPrice }: { totalPrice: number }) => {
+export const CartTotalPrice = () => {
+  const { totalPrice } = useCartStore();
+
   return (
     <div className="flex justify-between">
       <p className="text-sm font-semibold">Total</p>
       <p className="text-xs text-primary font-semibold">
-        Rp. {priceFormatter(totalPrice)}
+        Rp. {priceFormatter(totalPrice())}
       </p>
     </div>
   );
